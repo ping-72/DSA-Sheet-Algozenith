@@ -1,0 +1,11 @@
+# Ignore the folders except C++ code files
+.cph/
+.vscode/
+Contest_4/
+Test_9/
+*.txt
+*.exe
+*.bin
+
+
+# Other enteries
