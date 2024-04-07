@@ -1,0 +1,56 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../../Frontend Project"
+	},
+	{
+		"path": "../../../BAckend Proj"
+	},
+	{
+		"path": "../../../BAckend Learning"
+	},
+	{
+		"path": "D:/GC-2024-new"
+	}
+],
+  "settings": {
+    "files.associations": {
+      "iostream": "cpp",
+      "array": "cpp",
+      "deque": "cpp",
+      "forward_list": "cpp",
+      "list": "cpp",
+      "string": "cpp",
+      "unordered_map": "cpp",
+      "unordered_set": "cpp",
+      "vector": "cpp",
+      "initializer_list": "cpp",
+      "regex": "cpp",
+      "ostream": "cpp",
+      "*.tcc": "cpp",
+      "bitset": "cpp",
+      "system_error": "cpp",
+      "xiosbase": "cpp",
+      "format": "cpp",
+      "xstring": "cpp",
+      "utility": "cpp",
+      "cstdlib": "cpp",
+      "xutility": "cpp",
+      "limits": "cpp",
+      "type_traits": "cpp",
+      "span": "cpp",
+      "queue": "cpp",
+      "map": "cpp",
+      "set": "cpp",
+      "xtree": "cpp",
+      "ios": "cpp",
+      "tuple": "cpp",
+      "algorithm": "cpp",
+      "xlocale": "cpp"
+    },
+    "liveServer.settings.multiRootWorkspaceName": "BAckend Proj"
+  }
+}
