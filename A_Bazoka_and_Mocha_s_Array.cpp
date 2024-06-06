@@ -15,7 +15,7 @@ void solve()
 
     for (int i = 1; i < n; i++)
     {
-        if (arr[i - 1] < arr[i])
+        if (arr[i - 1] > arr[i])
         {
             isinc[i] = false;
             if (!isinc[i - 1])
