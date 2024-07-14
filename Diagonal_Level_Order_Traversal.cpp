@@ -10,34 +10,20 @@ struct Node
     Node(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-bool isBst(Node *root)
+vector<vector<int>> getDiagonalLevelorderTraversal(Node *root)
 {
-    // Complete the function
-    if (root == NULL)
-        return true;
-    queue<Node *> q;
-    q.push(root);
+    // Complete the function.
+    queue<pair<Node *, pair<int, int>>> q;
+    q.push({root, {0, 0}});
+
     while (!q.empty())
     {
-        auto a = q.front();
+        auto it = q.front();
         q.pop();
-        int value = a->val;
-        if (a->left != NULL)
-        {
-            auto b = a->left;
-            if (value <= b->val)
-                return false;
-            q.push(b);
-        }
-        if (a->right != NULL)
-        {
-            auto c = a->right;
-            if (value >= c->val)
-                return false;
-            q.push(c);
-        }
+        auto node = it.first;
+        auto x = it.second.first;
+        auto y = it.second.second;
     }
-    return true;
 }
 
 Node *getBinaryTree(vector<int> &num, int *ind)
@@ -70,14 +56,16 @@ int main()
             cin >> arr[i];
         int ind = 0;
         Node *tree = getBinaryTree(arr, &ind);
-        if (isBst(tree))
+        vector<vector<int>> ans = getDiagonalLevelorderTraversal(tree);
+        for (auto u : ans)
         {
-            cout << "yes\n";
+            for (auto v : u)
+            {
+                cout << v << " ";
+            }
+            cout << "\n";
         }
-        else
-        {
-            cout << "no\n";
-        }
+        cout << "\n";
     }
     return 0;
 }
