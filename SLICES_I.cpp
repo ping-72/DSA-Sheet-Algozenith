@@ -29,41 +29,32 @@ ll mul(ll a, ll b, ll mod){ return (mod + (a%mod * b%mod)%mod)%mod; }
 ll div(ll a, ll b, ll mod){ return (mod + (a%mod * inv(b,mod)%mod)%mod)%mod; }
 
 
-void solve() {
-     int n;
-        cin >> n;
-    vector<string> grid(2);
-    for (int i = 0; i < 2; ++i) {
-        cin >> grid[i];
-    }
+void solve(){
+   // #S -> O()
+   // #T -> O()
+   ll ans = 0;
+   int n;
+   cin>>n;
+   vector<ll> arr(n);
 
-    int pattern_count = 0;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < n; ++col) {
-            if (col + 2 < n && row + 1 < 2 &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row + 1][col] == '.' && grid[row + 1][col + 1] == '.' && grid[row + 1][col + 2] == '.') {
-                ++pattern_count;
-            }
+   for(int i=0; i<n;i++) cin>>arr[i];
 
-            if (row - 1 >= 0 && col + 2 < n &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row - 1][col] == '.' && grid[row - 1][col + 1] == '.' && grid[row - 1][col + 2] == '.') {
-                ++pattern_count;
-            }
+   int r =1;
+   for(int i=0; i<n-2;i++){
+        ll diff = arr[i+1] - arr[i];
+        while(r<=n-2 && arr[r+1] - arr[r] == diff){
+            r++;
         }
-    }
-
-    cout << pattern_count << endl;
+        
+        ans += max(0, (r-i-1));
+   }
+   cout<<ans<<endl;
 }
 
-int main() {
-    int test_cases;
-    cin >> test_cases;
-
-    while (test_cases--) {
-        solve();
-    }
-
-    return 0;
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    
+    // ll _t; cin>>_t; while(_t--)
+    solve(); return 0;
 }

@@ -29,41 +29,36 @@ ll mul(ll a, ll b, ll mod){ return (mod + (a%mod * b%mod)%mod)%mod; }
 ll div(ll a, ll b, ll mod){ return (mod + (a%mod * inv(b,mod)%mod)%mod)%mod; }
 
 
-void solve() {
-     int n;
-        cin >> n;
-    vector<string> grid(2);
-    for (int i = 0; i < 2; ++i) {
-        cin >> grid[i];
-    }
+void solve(){
+   // #S -> O()
+   // #T -> O()
+   int n;
+   cin>>n;
+   int b[n-1];
+   for(int i=0; i<n-1; i++){
+     cin>>b[i];
+   }
+   int a[n];
+   a[0] = b[0];
+  //  a[n-1]= b[n-2];
 
-    int pattern_count = 0;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < n; ++col) {
-            if (col + 2 < n && row + 1 < 2 &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row + 1][col] == '.' && grid[row + 1][col + 1] == '.' && grid[row + 1][col + 2] == '.') {
-                ++pattern_count;
-            }
+   for(int i=1; i<n;i++){
+     a[i] = b[i-1] | b[i];
+     if(b[i-1] != (a[i-1] & a[i])){
+          cout<<-1<<endl;
+          return;
+     }
+   }
+   for(auto l:a)cout<<l<<" ";
 
-            if (row - 1 >= 0 && col + 2 < n &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row - 1][col] == '.' && grid[row - 1][col + 1] == '.' && grid[row - 1][col + 2] == '.') {
-                ++pattern_count;
-            }
-        }
-    }
-
-    cout << pattern_count << endl;
+   cout<<endl;
+   
 }
 
-int main() {
-    int test_cases;
-    cin >> test_cases;
-
-    while (test_cases--) {
-        solve();
-    }
-
-    return 0;
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    
+    ll _t; cin>>_t; while(_t--)
+    solve(); return 0;
 }

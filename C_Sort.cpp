@@ -28,42 +28,53 @@ ll sub(ll a, ll b, ll mod){ return (mod + (a%mod - b%mod)%mod)%mod; }
 ll mul(ll a, ll b, ll mod){ return (mod + (a%mod * b%mod)%mod)%mod; }
 ll div(ll a, ll b, ll mod){ return (mod + (a%mod * inv(b,mod)%mod)%mod)%mod; }
 
+int cnt(string a, string b){
+     int n1 = a.length();
+     // int n2 = b.length();
+     multiset<char> st;
+     // sort(a.begin(), a.end());
+     // sort(b.begin(), b.end());
 
-void solve() {
-     int n;
-        cin >> n;
-    vector<string> grid(2);
-    for (int i = 0; i < 2; ++i) {
-        cin >> grid[i];
-    }
-
-    int pattern_count = 0;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < n; ++col) {
-            if (col + 2 < n && row + 1 < 2 &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row + 1][col] == '.' && grid[row + 1][col + 1] == '.' && grid[row + 1][col + 2] == '.') {
-                ++pattern_count;
-            }
-
-            if (row - 1 >= 0 && col + 2 < n &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row - 1][col] == '.' && grid[row - 1][col + 1] == '.' && grid[row - 1][col + 2] == '.') {
-                ++pattern_count;
-            }
-        }
-    }
-
-    cout << pattern_count << endl;
+     int ans = 0;
+     for(int i=0; i<n1 ;i++){
+          st.insert(a[i]);
+     }
+     for(int i=0; i<n1 ;i++){
+          if(st.find(b[i]) != st.end()){
+               st.erase(st.find(b[i]));
+          }
+          else{
+               cnt++;
+          }
+     }
+     return cnt;
 }
 
-int main() {
-    int test_cases;
-    cin >> test_cases;
+void solve(){
+   // #S -> O()
+   // #T -> O()
+   int n, q;
+   cin>>n>>q;
+   string a, b;
+   cin>>a>>b;
 
-    while (test_cases--) {
-        solve();
-    }
+   while(q--){
+     int l, r;
+     cin>>l>>r;
+     if(r<= n){
+          cout<<cnt(a.substr(l-1, r-l+1), b.substr(l-1, r-l+1));
+     }
+     else{
+          cout<<0<<endl;
+     }
+   }
 
-    return 0;
+}
+
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    
+    ll _t; cin>>_t; while(_t--)
+    solve(); return 0;
 }

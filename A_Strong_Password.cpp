@@ -29,40 +29,44 @@ ll mul(ll a, ll b, ll mod){ return (mod + (a%mod * b%mod)%mod)%mod; }
 ll div(ll a, ll b, ll mod){ return (mod + (a%mod * inv(b,mod)%mod)%mod)%mod; }
 
 
-void solve() {
-     int n;
-        cin >> n;
-    vector<string> grid(2);
-    for (int i = 0; i < 2; ++i) {
-        cin >> grid[i];
+int calculate_time(const string& s) {
+    int time = 2;
+    for (size_t i = 1; i < s.length(); ++i) {
+        if (s[i] == s[i - 1]) {
+            time += 1;
+        } else {
+            time += 2;
+        }
     }
+    return time;
+}
 
-    int pattern_count = 0;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < n; ++col) {
-            if (col + 2 < n && row + 1 < 2 &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row + 1][col] == '.' && grid[row + 1][col + 1] == '.' && grid[row + 1][col + 2] == '.') {
-                ++pattern_count;
-            }
-
-            if (row - 1 >= 0 && col + 2 < n &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row - 1][col] == '.' && grid[row - 1][col + 1] == '.' && grid[row - 1][col + 2] == '.') {
-                ++pattern_count;
+string maximize_typing_time(const string& s) {
+    string best_string = s;
+    int max_time = calculate_time(s);
+    
+    for (size_t i = 0; i <= s.length(); ++i) {
+        for (char c = 'a'; c <= 'z'; ++c) {
+            string new_str = s.substr(0, i) + c + s.substr(i);
+            int time = calculate_time(new_str);
+            if (time > max_time) {
+                max_time = time;
+                best_string = new_str;
             }
         }
     }
-
-    cout << pattern_count << endl;
+    
+    return best_string;
 }
 
 int main() {
-    int test_cases;
-    cin >> test_cases;
-
-    while (test_cases--) {
-        solve();
+    int t;
+    cin >> t;
+    cin.ignore(); 
+    while (t--) {
+        string s;
+        getline(cin, s);
+        cout << maximize_typing_time(s) << endl;
     }
 
     return 0;

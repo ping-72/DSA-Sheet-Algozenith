@@ -28,42 +28,43 @@ ll sub(ll a, ll b, ll mod){ return (mod + (a%mod - b%mod)%mod)%mod; }
 ll mul(ll a, ll b, ll mod){ return (mod + (a%mod * b%mod)%mod)%mod; }
 ll div(ll a, ll b, ll mod){ return (mod + (a%mod * inv(b,mod)%mod)%mod)%mod; }
 
+void 
 
-void solve() {
-     int n;
-        cin >> n;
-    vector<string> grid(2);
-    for (int i = 0; i < 2; ++i) {
-        cin >> grid[i];
-    }
+void solve(){
+   // #S -> O()
+   // #T -> O()
+   int n, m;
+   cin>>n>>m;
+   vector<vector<char>> g(n+1, vector<char> (m+1) );
+   stack<pair<int, int>> st;
+   for(int i=1; i<=n;i++){
+     for(int j=0; j<=m; j++){
+          cin>>g[i][j];
+     }
+   }
 
-    int pattern_count = 0;
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < n; ++col) {
-            if (col + 2 < n && row + 1 < 2 &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row + 1][col] == '.' && grid[row + 1][col + 1] == '.' && grid[row + 1][col + 2] == '.') {
-                ++pattern_count;
-            }
+   vector<vector<int>> vis(n+1, vector<int> (m+1, 0) );
+   int comp = 0;
+   for(int i=1; i<=n;i++){
+     for(int j=0; j<=m; j++){
+          cin>>g[i][j];
+          if(g[i][j] == '#' && !vis[i][j]){
+               st.push({i, j});
+               // dfs call
+               comp++;
+               vis[i][j] = comp;
+               dfs(i, j, comp);
 
-            if (row - 1 >= 0 && col + 2 < n &&
-                grid[row][col] == 'x' && grid[row][col + 2] == 'x' && grid[row][col + 1] == '.' &&
-                grid[row - 1][col] == '.' && grid[row - 1][col + 1] == '.' && grid[row - 1][col + 2] == '.') {
-                ++pattern_count;
-            }
-        }
-    }
-
-    cout << pattern_count << endl;
+          }
+     }
+   }
+   
 }
 
-int main() {
-    int test_cases;
-    cin >> test_cases;
-
-    while (test_cases--) {
-        solve();
-    }
-
-    return 0;
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    
+    // ll _t; cin>>_t; while(_t--)
+    solve(); return 0;
 }
